@@ -1,6 +1,7 @@
 name: llnl-scraper
 
 on:
+  push:
   pull_request: []
 
 jobs:
