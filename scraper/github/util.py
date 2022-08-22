@@ -16,6 +16,8 @@ def _license_obj(license):
             "URL": "https://api.github.com/licenses/apache-2.0",
             "name": "Apache-2.0",
         }
+    elif license in ("Boost Software License 1.0"):
+        obj = {"URL": "https://api.github.com/licenses/bsl-1.0", "name": "BSL-1.0"}
     elif license in ('BSD 2-clause "Simplified" License'):
         obj = {
             "URL": "https://api.github.com/licenses/bsd-2-clause",
@@ -26,6 +28,8 @@ def _license_obj(license):
             "URL": "https://api.github.com/licenses/bsd-3-clause",
             "name": "BSD-3-Clause",
         }
+    elif license in ("Creative Commons Zero v1.0 Universal"):
+        obj = {"URL": "https://api.github.com/licenses/cc0-1.0", "name": "CC0-1.0"}
     elif license in ("Eclipse Public License 1.0"):
         obj = {"URL": "https://api.github.com/licenses/epl-1.0", "name": "EPL-1.0"}
     elif license in ("Eclipse Public License 2.0"):
