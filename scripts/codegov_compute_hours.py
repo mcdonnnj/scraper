@@ -13,7 +13,8 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-code_gov_json = json.load(open(args.filename))
+with open(args.filename) as fd:
+    code_gov_json = json.load(fd)
 releases = code_gov_json["releases"]
 
 repo_urls = {
