@@ -193,14 +193,16 @@ class Project(dict):
             repo_license = None
 
         if repo_license:
-            license = repo_license.license
-            if license:
-                logger.debug("license spdx=%s; url=%s", license.spdx_id, license.url)
-                if license.url is None:
-                    project["permissions"]["licenses"] = [{"name": license.spdx_id}]
+            license_obj = repo_license.license
+            if license_obj:
+                logger.debug(
+                    "license spdx=%s; url=%s", license_obj.spdx_id, license_obj.url
+                )
+                if license_obj.url is None:
+                    project["permissions"]["licenses"] = [{"name": license_obj.spdx_id}]
                 else:
                     project["permissions"]["licenses"] = [
-                        {"URL": license.url, "name": license.spdx_id}
+                        {"URL": license_obj.url, "name": license_obj.spdx_id}
                     ]
             else:
                 project["permissions"]["licenses"] = None
