@@ -49,7 +49,7 @@ def create_tfs_project_analysis_client(url, token=None):
 
     if project_analysis_client is None:
         msg = "Unable to connect to TFS Enterprise (%s) with provided token."
-        raise RuntimeError(msg, url)
+        raise RuntimeError(msg % url)
 
     return project_analysis_client
 
@@ -69,7 +69,7 @@ def create_tfs_core_client(url, token=None):
 
     if tfs_client is None:
         msg = "Unable to connect to TFS Enterprise (%s) with provided token."
-        raise RuntimeError(msg, url)
+        raise RuntimeError(msg % url)
 
     return tfs_client
 
@@ -86,7 +86,7 @@ def create_tfs_git_client(url, token=None):
 
     if tfs_git_client is None:
         msg = "Unable to create TFS Git Client, failed to connect to TFS Enterprise (%s) with provided token."
-        raise RuntimeError(msg, url)
+        raise RuntimeError(msg % url)
 
     return tfs_git_client
 
@@ -103,7 +103,7 @@ def create_tfs_tfvc_client(url, token=None):
 
     if tfs_tfvc_client is None:
         msg = "Unable to create TFS Git Client, failed to connect to TFS Enterprise (%s) with provided token."
-        raise RuntimeError(msg, url)
+        raise RuntimeError(msg % url)
 
     return tfs_tfvc_client
 
