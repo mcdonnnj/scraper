@@ -18,10 +18,9 @@ def execute(command, cwd=None):
         raise ValueError("path does not exist: %s" % cwd)
 
     with Popen(
-        command, cwd=cwd, stdout=PIPE, stderr=STDOUT, shell=False
+        command, cwd=cwd, stdout=PIPE, stderr=PIPE, shell=False
     ) as process:  # nosec
-        # We redirect stderr to stdout so we can safely ignore stderr in the returned tuple
-        out, _ = process.communicate()
+        out, err = process.communicate()
 
     if process.returncode:
         logging.error(
@@ -30,7 +29,7 @@ def execute(command, cwd=None):
             process.returncode,
         )
 
-    return out.decode("utf-8")
+    return out.decode("utf-8"), err.decode("utf-8")
 
 
 def configure_logging(verbose=False):
@@ -129,10 +128,16 @@ def git_repo_to_sloc(url):
         tmp_clone = os.path.join(tmp_dir, "clone-dir")
 
         cmd = ["git", "clone", "--depth=1", url, tmp_clone]
-        execute(cmd)
+        _, err = execute(cmd)
+
+        if err:
+            logger.warning("Error encountered while cloning: url=%s stderr=%s", url, err)
 
         cmd = ["cloc", "--json", tmp_clone]
-        out = execute(cmd)
+        out, err = execute(cmd)
+
+        if err:
+            logger.warning("Error encountered while analyzing: url=%s stderr=%s", url, err)
 
         try:
             cloc_json = json.loads(out)
