@@ -131,13 +131,17 @@ def git_repo_to_sloc(url):
         _, err = execute(cmd)
 
         if err:
-            logger.warning("Error encountered while cloning: url=%s stderr=%s", url, err)
+            logger.warning(
+                "Error encountered while cloning: url=%s stderr=%s", url, err
+            )
 
         cmd = ["cloc", "--json", tmp_clone]
         out, err = execute(cmd)
 
         if err:
-            logger.warning("Error encountered while analyzing: url=%s stderr=%s", url, err)
+            logger.warning(
+                "Error encountered while analyzing: url=%s stderr=%s", url, err
+            )
 
         try:
             cloc_json = json.loads(out)
