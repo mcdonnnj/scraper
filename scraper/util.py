@@ -3,7 +3,7 @@ import json
 import logging
 import logging.config
 import os
-from subprocess import PIPE, STDOUT, Popen  # nosec
+from subprocess import PIPE, Popen  # nosec
 import tempfile
 
 logger = logging.getLogger(__name__)
